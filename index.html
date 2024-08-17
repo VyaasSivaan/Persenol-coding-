@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create File with JavaScript</title>
+</head>
+<body>
+    <h2>Create and Download a File</h2>
+    <textarea id="textInput" rows="10" cols="30" placeholder="Enter text here..."></textarea><br><br>
+    <button onclick="createAndDownloadFile()">Create File</button>
+
+    <script>
+        function createAndDownloadFile() {
+            // Get the text from the textarea
+            let text = document.getElementById('textInput').value;
+
+            // Create a blob with the text content
+            let blob = new Blob([text], { type: 'text/plain' });
+
+            // Create a link element
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'textfile.txt';
+
+            // Programmatically click the link to trigger the download
+            link.click();
+
+            // Clean up by revoking the object URL
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+</body>
+</html>
